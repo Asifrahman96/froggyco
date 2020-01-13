@@ -12,6 +12,3 @@ urlpatterns = [
     path('interaction', views.interaction, name="interaction"),
     path('404', views.page_404, name="404"),
 ]
-    
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
