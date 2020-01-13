@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% include 'partials/_navbar.html' %}
+<section class="checkout">
+    <div class="container">
+        <h2 class="heading-primary">
+            Complete Your Purchase
+        </h2>
+        <hr class="my-5 bg-dark">
+        <!-- <h2 class="heading-secondary primary-text-color">Your Orders</h2> -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <img src="{{ project.photo_card.url }}" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-8">
+                        <label>Title :</label>
+                        <h5 class="modal-project-title">{{ project.title }}</h5>
+                        <h5 class="cast mt-3"><span class="text-muted">Starring : {{ project.cast_1 }}</span></h5>
+                        <p class="place text-muted mt-3">{{ project.category }} / {{ project.project_type }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Price :</label>
+                        <h4 class="modal-project-price">
+                            <span class="text-muted small">KWD</span>
+                            <span class="primary-color">{{ project.price }}</span>
+                        </h4>
+                    </div>
+                </div>
+                <p class="place text-muted mb-3"><i class="fa fa-star mr-1 star"></i>
+                    Pay once and watch anytime
+                </p>
+                <div class="alert alert-warning" role="alert">
+                    Purchased Item is not returnable and cannot be cancelled.
+                </div>
+                <div class="form-group mt-4">
+                    <form action="{% url 'order' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <input type="hidden" name="project_id" value="{{ project.id }}">
+                        <input type="hidden" name="project_slug" value="{{ project.slug }}">
+                        <input type="hidden" name="project_title" value="{{ project.title }}">
+                        <input type="hidden" name="project_category" value="{{ project.category }}">
+                        <input type="hidden" name="name" value="{{user.first_name}} {{user.last_name}}">
+                        <input type="hidden" name="email" value="{{user.email}}">
+                        <input type="hidden" name="price" value="{{project.price}}">
+                        <input type="hidden" name="photo_card" value="{{project.photo_card.url}}">
+                        <div class="form-group">
+                            <button type="submit" class="button-primary">
+                                <i class="fas fa-money-check-alt mr-3"></i>Confirm Purchase
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr class="my-5 bg-dark">
+        <a class="button-white-small" href="{% url 'projects:project_detail' slug=project.slug %}">
+            <i class="fas fa-arrow-left"></i> Back to {{ project.title }}
+        </a>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock %}

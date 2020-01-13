@@ -1,0 +1,109 @@
+body {
+  background: #191c23;
+}
+
+.stat_box {
+  padding: 4rem;
+  border-radius: 4px;
+  margin-left: 3rem;
+  background: #2b2a36;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+.stat_box:first-child {
+  margin-left: 6.5rem;
+}
+
+.stat_box__heading {
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.stat_box__table_heading{
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.stat_box__heading-icon {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.stat_box__content {
+  font-size: 3rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.stats {
+  background: transparent;
+}
+
+.stats td {
+  font-size: 1.2rem;
+}
+
+.stats th,
+td {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.stats td {
+  color: var(--primary-text-color);
+  font-size: 1.2rem;
+}
+
+.progress {
+  background-color: transparent;
+  height: 2rem;
+}
+
+.progress-bar {
+  background-color: var(--primary-color);
+}
+.progress-caption {
+  color: var(--background-color);
+  font-size: 1rem;
+}
+.progress-revenue {
+  font-size: 1rem;
+}
+
+.orders_box {
+  margin-left: 7rem;
+  margin-right: 7rem;
+}
+
+.orders_table thead {
+  border-radius: 4px !important;
+}
+
+table.dataTable tbody tr {
+  background-color: transparent !important;
+}
+.dataTables_paginate {
+  margin-top: 1rem;
+}
+
+.dataTables_info {
+  color: #777777 !important;
+}
+
+.dataTables_length label{
+    margin-left: 2rem;
+}
+
+
+.no_order_found{
+  margin-top:2rem;
+  width:8rem;
+}

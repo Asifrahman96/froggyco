@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% include 'partials/_navbar.html' %}
+<section class="section-logout">
+    <div class="container">
+        <div class="container logout-container text-center" style="margin-top: 10rem;">
+            <img src="{% static 'app/images/logo/handshake.svg' %}" class="handshake">
+            <p class="heading-tertiary primary-color mt-5">Thank you for visitng us. You are now logged out.</p>
+            <div class="form-group mt-5">
+                <a href="{% url 'login' %}" class="button-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login again
+                </a>
+            </div>
+            <p class="place mt-4 text-muted">OR</p>
+            <div class="form-group mt-4">
+                <a href="/" class="auth-link">
+                    <i class="fas fa-arrow-left"></i> Back to HomePage
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock %}

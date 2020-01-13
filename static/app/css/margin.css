@@ -1,0 +1,47 @@
+#main-header,
+#about-header,
+#talent{
+    margin-top: 6.5rem;
+}
+#articles,
+#single-article,
+#explore,
+#promos,
+#theatre,
+#series,
+#movie,
+#contact,
+#interaction,
+.section-dashboard,
+.section_error,
+.admin_dashboard,
+.checkout{
+    margin-top: 10rem;
+}
+
+.section-logout{
+    margin-top:8rem;
+}
+
+.section-trending,
+.section-theatres,
+.section-series,
+.section-movies,
+.section-tvshows,
+.section-animation,
+.section-articles{
+  margin-top: 6rem;
+}
+
+.carousel-card,
+.section-category{
+    margin-top: 4rem;
+}
+
+.section-connect,
+.section-team,
+.section-contact{
+    margin-top: 5rem;
+}
+
+  

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% include 'partials/_navbar.html' %}
+<section class="section_error">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="{% static 'app/images/logo/error_404.svg' %}" class="error_404">
+            </div>
+            <div class="col-md-6">
+                <p class="heading-tertiary mt-5">
+                    <span class="">
+                        It looks like you may have taken a wrong turn.
+                    </span>
+                    <span class="">
+                        Don't worry... It happens to the best of us.
+                    </span>
+                </p>
+                <div class="form-group mt-5">
+                    <a href="/" class="button-white">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock %}

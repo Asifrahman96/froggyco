@@ -1,0 +1,42 @@
+{% load static %}
+<footer>
+    <div class="container footer">
+        <hr class="bg-dark mb-5">
+        <div class="row text-left">
+            <div class="col-md-3 mt-5">
+                <a class="navbar-brand-footer" href="/"><img src="{% static 'app/images/Logo/logo.png' %}"></a>
+                <!-- <a href="#" class="footer-link ml-4">Policies</a>
+                <a href="#" class="footer-link ml-4">Terms & Conditions</a>
+                <a href="#" class="footer-link ml-4">Privacy</a>
+                <a href="#" class="footer-link ml-4">Sitemap</a>
+                <a href="{% url 'interaction' %}" class="footer-link ml-4">Interactions</a>
+                <a href="#" class="footer-link ml-4">Help</a> -->
+            </div>
+            <div class="col-md-3 mt-5">
+                <a class="footer-logo">Quick Links</a>
+                <a href="/" class="footer-link mt-3">Home</a>
+                <a href="{% url 'projects:projects' %}" class="footer-link">Explore</a>
+                <a href="{% url 'promos' %}" class="footer-link">Promos</a>
+                <a href="{% url 'about' %}" class="footer-link">About us</a>
+            </div>
+            <div class="col-md-3 mt-5">
+                <a class="footer-logo">Connect</a>
+                <a href="https://www.facebook.com/Frogyco-TV-598220953882473/" add target="_blank" class="footer-link mt-3">Facebook</a>
+                <a href="https://www.instagram.com/frogy_media_production/" add target="_blank" class="footer-link">Instagram</a>
+                <a href="https://twitter.com/frogyco" add target="_blank" class="footer-link">Twitter</a>
+                <a href="https://www.youtube.com/channel/UCrVU5V2nSTTWKL083jOMRgg" add target="_blank" class="footer-link">YouTube</a>
+            </div>
+            <div class="col-md-3 mt-5">
+                <a class="footer-logo">Get in touch</a>
+                <!-- <a class="footer-link mt-3 text-muted">Contact : 965 223344</a> -->
+                <a class="footer-link text-muted"><i class="far fa-envelope"></i> froggyco@live.com</a>
+            </div>
+        </div>
+        <div class="col-lg-12 text-center">
+            <hr class="my-5 bg-dark">
+            <!-- <a href="http://asifrahman.herokuapp.com/" add target="_blank" class="footer-link">Made with ♥️ by Asif
+                    Rahman</a> -->
+            <p class="trademark">froggyco.net, copyright &copy; 2019</p>
+        </div>
+    </div>
+</footer>

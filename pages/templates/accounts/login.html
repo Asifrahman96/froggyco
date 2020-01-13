@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load humanize %}
+{% load static %}
+{% include 'partials/_navbar.html' %}
+<link rel="stylesheet" href="{% static 'app/css/input.css'%}">
+<section class="section-accounts">
+    <div class="container">
+        <div class="col-lg-6 col-md-12 col-sm-12 offset-lg-3 auth-container">
+            <h1 class="heading-primary text-center">Login</h1>
+            <span class="text-muted place text-center">
+                Enter your username and password to login
+            </span>
+            <hr class="bg-dark mt-3">
+            {% include 'partials/_alerts.html' %}
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group mt-5">
+                    <label for="username">Username</label>
+                    <input name="username" placeholder="Please enter your username" required autocomplete="off">
+                </div>
+                <div class="form-group mt-5">
+                    <label for="password">Password</label>
+                    <input name="password" type="password" placeholder="Please enter your password" required
+                        autocomplete="off">
+                </div>
+                <div class="form-group mt-5">
+                    <button class="button-primary btn-block" type="submit">Login</button>
+                </div>
+                <div class="form-group mt-5 text-center">
+                    <a href="{% url 'register' %}" class="auth-link">Don't have an account ? Register here</a>
+                </div>
+                <div class="form-group mt-5 text-center">
+                    <a href="{% url 'password_reset' %}" class="auth-link">Forgot Password ?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock%}

@@ -1,0 +1,30 @@
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/svg/all.css'%}">
+<link href="{% static 'app/css/videojs.css'%}" rel="stylesheet">
+<link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
+<!-- <script>
+    $(document).ready(function () {
+        $('.video-js').bind('contextmenu', function () { return false; });
+    });
+</script> -->
+<section class="section-video">
+    <div class="button-container">
+        <a href="{% url 'projects:project_detail' slug=video.slug %}" class="button-back">
+            <i class="far fa-arrow-alt-circle-left"></i>
+            {{ video.title }}
+        </a>
+    </div>
+    <video id="my-player" class="video-js"
+        poster="{{ video.photo_cover.url }}"
+        controlsList="nodownload"
+        controls preload="metadata"
+        autoplay="true"
+        poster="{{ video.photo_cover.url }}"
+        oncontextmenu="return false">
+        <source src="{{ video.video.url }}" type="video/mp4">
+        </source>
+    </video>
+</section>
+<script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
+{% endblock %}

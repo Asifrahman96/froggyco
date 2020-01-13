@@ -1,0 +1,54 @@
+:root {
+    --primary-color: #4ecca3;
+    --primary-color-dark: #219770;
+    --background-color: #232931;
+    --background-color-2: #393e46;
+    --primary-text-color: #eeeeee;
+  }
+
+  
+
+.video-overlay {
+    width: 100%;
+    background: rgba(0,0,0,.80);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+  }
+  .videoBox {
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    top:50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .videoBox video {
+    width: 100%;
+  }
+  .close {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: -3rem;
+    right: -5rem;
+    display: block;
+    background: transparent url(../Images/close.png) no-repeat center center;
+    opacity: .8;
+    cursor: pointer;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+
+
+  @media (min-width: 767px) {
+    .videoBox {
+      width: 50%;
+    }
+  }

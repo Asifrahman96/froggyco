@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load i18n %}
+{% load static  %}
+{% load humanize %}
+{% include 'partials/_navbar.html' %}
+<section class="section-about">
+    <header id="about-header" class="about-header">
+        <div class="container">
+            <div class="caption">
+                <h1 class="about-heading">
+                    <span class="about-heading-primary">{% trans "Frogy Media Productions" %}</span>
+                    <span class="about-heading-secondary mt-2">
+                        <p>
+                            We are one of the leading media production companies in Kuwait with more than 15 years of experience.<br>
+                        </p>
+                        <p>
+                            WE'RE A CLOSE TEAM OF PRODUCERS, DESIGNERS & DEVELOPERS WHO WORK TOGETHER TO CREATE BEAUTIFUL, ENGAGING DIGITAL EXPERIENCES.<br>
+                        </p>
+                        <p>
+                            “IT SEEMS TO US THAT THERE IS A FINE LINE BETWEEN INSANITY AND DEDICATION. WE CALL THAT LINE COMMITMENT”.
+                        </p>
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </header>
+</section>
+<section class="section-team">
+    <div class="container">
+        <h2 class="heading">
+            <div class="bar"></div>
+            <span class="heading-primary"> Meet our amazing team </span>
+            <span class="heading-tertiary text-muted">People behind frogy media productions </span>
+        </h2>
+        <div class="row mt-5">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card">
+                    <img src="{% static 'app/images/Team/about-card.jpg'%}" class="card-img-top">
+                    <h5 class="card-title mt-3">Name</h5>
+                    <h5 class="card-position">CEO & Founder</h5>
+                    <div class="social">
+                        <a class="social-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card">
+                    <img src="{% static 'app/images/Team/about-card.jpg'%}" class="card-img-top">
+                    <h5 class="card-title mt-3">Name</h5>
+                    <h5 class="card-position">CEO & Founder</h5>
+                    <div class="social">
+                        <a class="social-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card">
+                    <img src="{% static 'app/images/Team/about-card.jpg'%}" class="card-img-top">
+                    <h5 class="card-title mt-3">Name</h5>
+                    <h5 class="card-position">CEO & Founder</h5>
+                    <div class="social">
+                        <a class="social-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="card">
+                    <img src="{% static 'app/images/Team/about-card.jpg'%}" class="card-img-top">
+                    <h5 class="card-title mt-3">Name</h5>
+                    <h5 class="card-position">CEO & Founder</h5>
+                    <div class="social">
+                        <a class="social-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="social-link ml-5" href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'partials/_connect.html' %}
+{% include 'partials/_footer.html' %}
+{% endblock %}

@@ -1,0 +1,57 @@
+input{
+    background: transparent;
+    border: 0;
+    color:var(--primary-text-color);
+    border-bottom: 2px solid var(--primary-color);
+    border-radius: 0;
+    font-size:2rem;
+    width: 100%;
+    max-width: 800px;
+    display: inline-block;
+    vertical-align: middle;
+    outline: none !important;
+    height: 6rem;
+}
+  
+input::placeholder,
+textarea::placeholder{
+    color: #676F77;
+    font-size:1.5rem;
+    opacity: .5;
+  }
+  
+label{
+    font-size:1.5rem;
+    color: var(--primary-color);
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+  }
+
+  textarea{
+    background: transparent;
+    border: none;
+    width: 100%;
+    max-width: 800px;
+    color:var(--primary-text-color);
+    border-bottom: 2px solid var(--primary-color);
+    border-radius: 0;
+    font-size:2rem;
+    outline: none;
+}
+
+.custom-file-label{
+    background: transparent;
+    color: var(--primary-color);
+}
+
+.section-accounts ul{
+  font-size: 1.5rem !important;
+  color: #777;
+}
+
+.section-accounts ul li{
+  list-style: square;
+}
+
+

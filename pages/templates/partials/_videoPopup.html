@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/videoPopup.css'%}">
+<div class="video-overlay">
+    <div class="videoBox" id="videobox">
+        <a class="close"></a>
+        <video autoplay controls src="{% static 'app/video/trailer.mp4'%}"></video>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>

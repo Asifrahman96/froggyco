@@ -1,0 +1,345 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% include 'partials/_datatables.html' %}
+{% load mathfilters %}
+{% include 'partials/_navbar.html' %}
+<link rel="stylesheet" href="{% static 'app/css/admin_dashboard.css'%}">
+<section class="admin_dashboard">
+    <div class="container-fluid">
+        <ul class="nav nav-pills ml-4 mb-3 mt-5 justify-content-start" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-dashboard-tab" data-toggle="pill" href="#pills-dashboard"
+                    role="tab" aria-controls="pills-dashboard" aria-selected="true"><i
+                        class="far fa-chart-bar mr-2"></i>
+                    Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-videos-tab" data-toggle="pill" href="#pills-videos" role="tab"
+                    aria-controls="pills-videos" aria-selected="false"><i class="fas fa-video mr-2"></i>
+                    Videos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-orders-tab" data-toggle="pill" href="#pills-orders" role="tab"
+                    aria-controls="pills-orders" aria-selected="false"><i class="fas fa-tag mr-2"></i>
+                    Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-users-tab" data-toggle="pill" href="#pills-users" role="tab"
+                    aria-controls="pills-users" aria-selected="false"><i class="fas fa-user mr-2"></i>
+                    Users</a>
+            </li>
+        </ul>
+        <!-------- Dashboard Page -------->
+        <div class="tab-content mt-5" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                aria-labelledby="pills-dashboard-tab">
+                <div class="col-md-12">
+                    <!-------- First Row -------->
+                    <div class="row">
+                        <div class="col-md-3 stat_box">
+                            <h5 class="stat_box__heading">
+                                Total Revenue
+                            </h5>
+                            <p class="stat_box__content">
+                                <span class="text-muted">
+                                    KWD
+                                </span>
+                                {{ revenue.price__sum }}
+                            </p>
+                        </div>
+                        <div class="col-md-2 stat_box">
+                            <h5 class="stat_box__heading">Total Orders</h5>
+                            <p class="stat_box__content">
+                                {{ total_orders }}
+                            </p>
+                        </div>
+                        <div class="col-md-3 stat_box">
+                            <h5 class="stat_box__heading">Today Revenue</h5>
+                            {% if today %}
+                            <p class="stat_box__content">
+                                {% for date in today %}
+                                <span class="text-muted">KWD</span>
+                                {{ date.sum }}
+                                <span class="text-muted ml-3 mr-3">|</span>
+                                <span class="text-muted"><i class="fas fa-tag mr-2"></i></span>
+                                {{ date.project_id__count }}
+                                {% endfor %}
+                            </p>
+                            {% else %}
+                            <div class="no_order text-center">
+                                <img src="{% static 'images/logo/no_video_found.svg'%}" class="no_order_found">
+                                <p class="place text-muted text-center">No Orders today</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-2 stat_box">
+                            <h5 class="stat_box__heading">Visitors</h5>
+                            <p class="stat_box__content">
+                                4
+                            </p>
+                        </div>
+                    </div>
+                    <!--------  Second Row  --------->
+                    <div class="row mt-5">
+                        <!--------  Top Videos --------->
+                        <div class="col-md-6 stat_box">
+                            <h5 class="stat_box__heading">Top Videos</h5>
+                            <table class="table stats mt-5">
+                                <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-3">Name</th>
+                                        <th class="col-3">Category</th>
+                                        <th class="col-6">Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for count in counts %}
+                                    <tr class="d-flex">
+                                        <td class="col-3">
+                                            {{ count.project_title}}
+                                        </td>
+                                        <td class="col-3">
+                                            {{ count.project_category }}
+                                        </td>
+                                        <td class="col-6">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100"
+                                                    style="width:{{ count.project_id__count }}%">
+                                                    <span class="progress-caption"> {{ count.project_id__count }}
+                                                    </span>
+                                                </div>
+                                                <span class="progress-revenue mt-1 ml-4">
+                                                    <span class="primary-color">
+                                                        {{ count.price | mul:count.project_id__count }} KWD
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--------  Top Category  --------->
+                        <div class="col-md-5 stat_box">
+                            <h5 class="stat_box__heading">Top Category</h5>
+                            <table class="table stats mt-5">
+                                <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-3">Name</th>
+                                        <th class="col-9">Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="d-flex">
+                                        <td class="col-3">
+                                            Theatre
+                                        </td>
+                                        <td class="col-9">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100"
+                                                    style="width:{{ theatre_orders }}%">
+                                                    <span class="progress-caption">{{ theatre_orders }}</span>
+                                                </div>
+                                                <span class="progress-revenue mt-1 ml-4">
+                                                    <span class="primary-color">
+                                                        {{ theatre_revenue.price__sum }} KWD
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <td class="col-3">
+                                            Movie
+                                        </td>
+                                        <td class="col-9">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100"
+                                                    style="width:{{ movie_orders}}%">
+                                                    <span class="progress-caption"> {{ movie_orders }} </span>
+                                                </div>
+                                                <span class="progress-revenue mt-1 ml-4">
+                                                    <span class="primary-color">
+                                                        {{ movie_revenue.price__sum }} KWD
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--------  Third Row  --------->
+                    <div class="row mt-5">
+                        <!--------  Daily orders & revenue  --------->
+                        <div class="col-md-5 stat_box">
+                            <h5 class="stat_box__heading">Daily Orders & Revenue</h5>
+                            <table class="table stats mt-5">
+                                <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-3">Date</th>
+                                        <th class="col-9">Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for date in daily %}
+                                    <tr class="d-flex">
+                                        <td class="col-3">
+                                            {{ date.order_date__date}}
+                                        </td>
+                                        <td class="col-9">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                                    aria-valuemin="0" aria-valuemax="100"
+                                                    style="width:{{ date.sum | div:5 }}%">
+                                                    <span class="progress-caption"> {{ date.project_id__count }} </span>
+                                                </div>
+                                                <span class="progress-revenue mt-1 ml-4">
+                                                    <span class="primary-color">
+                                                        {{ date.sum }} KWD
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-muted"><small>Last 5 days</small></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---------- Videos Page ---------->
+            <div class="tab-pane fade show" id="pills-videos" role="tabpanel" aria-labelledby="pills-videos-tab">
+                <div class="orders_box stat_box">
+                    <h5 class="stat_box__table_heading primary-color">
+                        <i class="fas fa-video mr-2"></i>
+                        Video Stats
+                    </h5>
+                    {% if videos %}
+                    <table id="videos" class="table table-dark stats text-center mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Video Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Orders Made</th>
+                                <th scope="col">Total Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for video in videos %}
+                            <tr>
+                                <td>{{ video.project_id }}</td>
+                                <td>{{ video.project_title }}</td>
+                                <td>{{ video.project_category }}</td>
+                                <td>{{ video.price}} <small class="text-muted">KWD</small></td>
+                                <td>{{ video.project_id__count }}</td>
+                                <td>{{ video.price | mul:video.project_id__count }}
+                                    <small class="text-muted">KWD</small>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="container no_video_found p-5 text-center">
+                        <img src="{% static 'images/logo/no_video_found.svg'%}">
+                        <p class="heading-tertiary primary-color">No Orders Made Yet.</p>
+                    </div>
+                    {% endif%}
+                </div>
+            </div>
+            <!---------- Orders Page ---------->
+            <div class="tab-pane fade show" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+                <div class="orders_box stat_box">
+                    <h5 class="stat_box__table_heading primary-color">
+                        <i class="fas fa-tag mr-2"></i>
+                        Order Details
+                    </h5>
+                    {% if orders %}
+                    <table id="orders" class="table table-dark stats text-center mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">User name</th>
+                                <th scope="col">Email Id</th>
+                                <th scope="col">Order Item</th>
+                                <th scope="col">Order Category</th>
+                                <th scope="col">Order Date & Time</th>
+                                <th scope="col">Order Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.name }}</td>
+                                <td>{{ order.email }}</td>
+                                <td>{{ order.project_title }}</td>
+                                <td>{{ order.project_category }}</td>
+                                <td>{{ order.order_date }}</td>
+                                <td>{{ order.price }} <small>KWD</small></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="container no_video_found p-5 text-center">
+                        <img src="{% static 'images/logo/no_video_found.svg'%}">
+                        <p class="heading-tertiary primary-color">No Orders Made Yet.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-------- users Page -------->
+            <div class="tab-pane fade show" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
+                <div class="orders_box stat_box">
+                    <h5 class="stat_box__table_heading primary-color">
+                        <i class="fas fa-user mr-2"></i>
+                        User Details
+                    </h5>
+                    <table id="users" class="table table-dark stats mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">name</th>
+                                <th scope="col">username</th>
+                                <th scope="col">Email Id</th>
+                                <th scope="col">Date Joined</th>
+                                <th scope="col">last login</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.date_joined | date }}</td>
+                                <td>{{ user.last_login | date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock%}

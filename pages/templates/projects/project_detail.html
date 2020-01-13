@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+{% load embed_video_tags %}
+{% include 'partials/_navbar.html' %}
+{% include 'partials/_lightbox.html' %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+<section class="section-project_details" id="theatre">
+    <div class="container">
+        {% include 'partials/_alerts.html' %}
+        <div class="row ml-4 mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card">
+                    <img src="{{ project.photo_card.url }}" class="img-fluid">
+                </div>
+                <div class="form-group mt-4">
+                    {% if project.video %}
+                    {% if user.is_authenticated %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <input type="hidden" name="project_id" value="{{ project.id }}">
+                        <input type="hidden" name="project_slug" value="{{ project.slug }}">
+                        <button type="submit" class="button-primary btn-block">
+                            <i class="fas fa-play"></i>
+                                Watch Now 
+                        </button>     
+                    </form>
+                    {% else %}
+                        <a class="button-primary btn-block text-center" href="{% url 'login' %}">
+                            <i class="fas fa-unlock-alt"></i>
+                            Please login to watch
+                        </a>
+                    {% endif %}
+                    {% endif %}
+                    <button href="#videoStory" class="button-white btn-block mt-3" id="videoLink"><i class="fas fa-film"></i> Play
+                        Trailer</button>
+                    <!--Trailer  Video modal -->
+                    <div id="videoStory" class="mfp-hide" style="max-width: 50%; margin: 0 auto;">
+                        <div class="videoWrapper">
+                            <div id="myVideo">
+                                {% video project.trailer 'medium' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                {{user_id}}
+                <h2 class="heading-primary">{{ project.title }}</h2>
+                <span class="place text-muted"> {{ project.category }} / {{ project.project_type }}</span>
+                <h5 class="cast mt-3"><span class="primary-color">Cast : </span>{{ project.cast_1 }},
+                    {{ project.cast_2 }}, {{ project.cast_3 }}</h5>
+                <h5 class="cast mt-3"><span class="primary-color">Director : </span>{{ project.director }}</h5>
+                <h5 class="cast mt-3"><span class="primary-color">Released Date : </span>{{ project.year }}</h5>
+                <h5 class="cast mt-3"><span class="primary-color">Duration : </span> 3 hrs</h5>
+                <h5 class="cast mt-3"><span class="primary-color">Prodcued by : </span> Frogy Centre for Art & Media</h5>
+                <h5 class="cast mt-3 mb-3"><span class="primary-color">Description : </span><span class="para">
+                    {{ project.description | safe }}
+                </span></h5>
+                {% if project.video %}
+                    <span class="badge badge-pill">
+                        {{ project.price }} <small>KWD</small>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+        <!--- Gallery -->
+        {% if project.gallery_1 %}
+        <div class="gallery ml-5" style="margin-top: 5rem;">
+            <h2 class="heading">
+                <div class="bar"></div>
+                <span class="heading-secondary primary-color"> On Stage Pictures </span>
+            </h2>
+            <div class="owl-carousel owl-theme mt-5">
+                <div class="item">
+                    <a class="example-image-link" href="{{ project.gallery_1.url }}" data-lightbox="example-set"
+                        data-title="{{ project.title }}">
+                        <img src="{{ project.gallery_1.url }}" alt="{{ project.title }}" />
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="example-image-link" href="{{ project.gallery_2.url }}" data-lightbox="example-set"
+                        data-title="{{ project.title }}">
+                        <img src="{{ project.gallery_2.url }}" alt="" />
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="example-image-link" href="{{ project.gallery_3.url }}" data-lightbox="example-set"
+                        data-title="{{ project.title }}">
+                        <img src="{{ project.gallery_3.url }}" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="recommended ml-5" style="margin-top: 5rem;">
+            <h2 class="heading">
+                <div class="bar"></div>
+                <span class="heading-secondary primary-color"> Also recommended </span>
+            </h2>
+            <div class="carousel-card">
+                <div id="carousel-small" class="owl-carousel owl-theme">
+                    {% for project in rec_projects %}
+                        <div class="item">
+                            <a href="{% url 'projects:project_detail' slug=project.slug %}">
+                                <div class="card-box">
+                                    <img src="{{ project.photo_card.url }}" class="img-fluid">
+                                    <div class="card-box-layer_top">
+                                        <div class="card-box-text">
+                                            <span class="icon">
+                                                <i class="fas fa-play-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'app/js/video-modal.js' %}"></script>
+{% include 'partials/_owl_carousel_import.html' %}
+<script src="{% static 'app/js/gallery.js' %}"></script>
+{% include 'partials/_footer.html' %}
+{% endblock %}

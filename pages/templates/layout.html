@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="{% static 'app/images/Logo/logo-icon-310.png'%}"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'app/svg/all.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'app/css/margin.css'%}">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>Frogyco TV</title>
+</head>
+<body>
+    <div id="overlay">
+        <div class="spinner"></div>
+    </div>
+    <script type="text/javascript">
+        var overlay = document.getElementById("overlay");
+        window.addEventListener('load', function (){
+            overlay.style.display = 'none';
+        })
+    </script>
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'app/js/main.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.js' %}"></script>
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+</body>
+</html>

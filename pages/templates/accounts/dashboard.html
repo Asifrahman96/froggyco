@@ -1,0 +1,122 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% include 'partials/_navbar.html' %}
+<link rel="stylesheet" href="{% static 'app/css/input.css'%}">
+<section class="section-dashboard">
+    <div class="container">
+        {% include 'partials/_alerts.html' %}
+        <h2 class="heading-primary">
+            Your Profile
+        </h2>
+        <div class="row mt-5">
+            <div class="col-md-5 stat_box">
+                <p class="heading-tertiary text-muted">
+                    Profile Details
+                </p>
+                <h2 class="heading-secondary mt-3">
+                    {{ user.first_name }} <span class="primary-color">{{ user.last_name }}</span>
+                </h2>
+                <span class="text-muted place"><i class="far fa-envelope"></i> {{ user.email }}</span>
+                <span class="text-muted place mt-1">Member since <span
+                        class="primary-color">{{ user.date_joined | date }}</span></span>
+                <div class="form-row mt-4">
+                    <a href="" class="button-primary-small" data-toggle="modal" data-target="#exampleModal"><i
+                            class="far fa-edit"></i> Edit Profile</a>
+                    <a href="{% url 'password_change' %}" class="button-white-small ml-3"><i class="fas fa-lock"></i>
+                        Change
+                        Password</a>
+                    <!--- Edit Profile Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h4 class="modal-title">
+                                        Edit
+                                        <span class="primary-color">
+                                            Profile
+                                        </span>
+                                    </h4>
+                                    <div class="edit-form mt-4">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            {{ u_form }}
+                                            <div class="form-group mt-4">
+                                                <button class="button-primary btn-block" type="submit">Update
+                                                    Profile</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!--- End of Edit Profile Modal -->
+                </div>
+            </div>
+            <div class="col-md-3 stat_box text-center">
+                <h2 class="heading-tertiary text-muted">
+                    Videos purchased
+                </h2>
+                <p class="stat_box__icon">
+                    <i class="fas fa-video mr-5 text-muted"></i>
+                    <span class="primary-color">
+                        {{ videos_count }}
+                    </span>
+                </p>
+            </div>
+            <div class="col-md-3 stat_box text-center">
+                <h2 class="heading-tertiary text-muted">
+                    Total Money spent
+                </h2>
+                <p class="stat_box__content">
+                    <span class="text-muted">KWD</span>
+                    <span class="primary-color">
+                        {{ money_spent.price__sum }}
+                    </span>
+                </p>
+            </div>
+        </div>
+        {% if orders %}
+        <hr class="bg-dark my-5">
+        <h2 class="heading-secondary">
+            Your Videos
+        </h2>
+        <div class="row mt-5">
+            {% for order in orders %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a href="{% url 'projects:project_detail' order.project_slug %}">
+                    <div class="card">
+                        <div class="card-img-top">
+                            <img src="{{ order.photo_card }}" class="img-fluid">
+                        </div>
+                        <div class="card-body text-center">
+                            <h2 class="card-title">{{ order.project_title }}</h2>
+                            <p class="card-text text-muted">
+                                <span>{{ order.order_date | timesince }} ago</span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="container no_video_found p-5 text-center">
+            <img src="{% static 'images/logo/no_video_found.svg'%}">
+            <p class="heading-tertiary primary-color">You don't have any videos yet.</p>
+        </div>
+        {% endif %}
+        <hr class="bg-dark my-5">
+        <div class="form-row">
+            <a href="{% url 'projects:projects' %}" class="button-white-small"><i class="fas fa-video"></i> Explore Videos</a>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}" class="button-special-small ml-3"><i class="fas fa-tachometer-alt"></i> Admin
+                Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock%}

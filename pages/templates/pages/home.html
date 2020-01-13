@@ -1,0 +1,160 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% load humanize %}
+<header id="main-header">
+    {% include 'partials/_navbar.html' %}
+    <div class="carousel">
+        <div id="cover" class="owl-carousel owl-theme">
+            {% for project in projects_cover %}
+            <div class="item">
+                <div class="image-box">
+                    <a href="{% url 'projects:project_detail' slug=project.slug %}">
+                        <img src="{{ project.photo_cover.url }}" class="img-fluid">
+                    </a>
+                    <div class="caption-text">
+                        <h1 class="caption-primary">{{ project.title }}</h1>
+                        <h2 class="caption-tertiary primary-color">{{ project.category }} / {{ project.project_type }}
+                        </h2>
+                        <a class="caption-link" href="{% url 'projects:project_detail' slug=project.slug %}">
+                            <i class="fas fa-play"></i> Watch Now</a>
+                        {% if project.video %}
+                            <span class="price ml-3">
+                                {{ project.price }} <small>KWD</small>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container-fluid">
+        <section class="section-category text-center">
+            <div class="carousel-icon">
+                <div id="carousel-category" class="owl-carousel owl-theme">
+                    <div class="item">
+                        <div class="icon-box">
+                            <a href="#section-theatres">
+                                <i class="fas fa-theater-masks"></i>
+                                <h3 class="icon-text">Theatres</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon-box">
+                            <a href="#section-series">
+                                <i class="fas fa-video"></i>
+                                <h3 class="icon-text">Series</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon-box">
+                            <a href="#section-movies">
+                                <i class="fas fa-film"></i>
+                                <h3 class="icon-text">Movies</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-trending" id="section-trending">
+            <h2 class="heading">
+                <div class="bar"></div>
+                <span class="heading-primary"> Trending </span>
+                <span class="heading-tertiary text-muted"> Currently trending videos </span>
+            </h2>
+            <div class="carousel-card">
+                <div id="carousel-small" class="owl-carousel owl-theme">
+                    {% for project in projects_trending %}
+                    <div class="item">
+                        <a href="{% url 'projects:project_detail' slug=project.slug %}">
+                            <div class="card-box">
+                                <img src="{{ project.photo_card.url }}" class="img-fluid">
+                                <div class="card-box-layer_top">
+                                    <div class="card-box-text">
+                                        <span class="icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </span>
+                                        <span>
+                                            Watch Now
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="section-theatres" id="section-theatres">
+            <h2 class="heading">
+                <div class="bar"></div>
+                <span class="heading-primary"> Theatres </span>
+                <span class="heading-tertiary text-muted"> Collection of our Theatres </span>
+            </h2>
+            <div class="carousel-card">
+                <div id="carousel-small" class="owl-carousel owl-theme">
+                    {% for project in projects_theatre %}
+                    <div class="item">
+                        <a href="{% url 'projects:project_detail' slug=project.slug %}">
+                            <div class="card-box">
+                                <img src="{{ project.photo_card.url }}" class="img-fluid">
+                                <div class="card-box-layer_top">
+                                    <div class="card-box-text">
+                                        <span class="icon">
+                                            <i class="fas fa-play-circle"></i>
+                                        </span>
+                                        <span>
+                                            Watch Now
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="section-movies" id="section-movies">
+            <h2 class="heading">
+                <div class="bar"></div>
+                <span class="heading-primary"> Movies </span>
+                <span class="heading-tertiary text-muted"> Collection of our Movies </span>
+            </h2>
+            <div class="carousel-card">
+                <div id="carousel-small" class="owl-carousel owl-theme">
+                    {% for project in projects_movie %}
+                        <div class="item">
+                            <a href="{% url 'projects:project_detail' slug=project.slug %}">
+                                <div class="card-box">
+                                    <img src="{{ project.photo_card.url }}" class="img-fluid">
+                                    <div class="card-box-layer_top">
+                                        <div class="card-box-text">
+                                            <span class="icon">
+                                                <i class="fas fa-play-circle"></i>
+                                            </span>
+                                            <span>
+                                                Watch Now
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% include 'partials/_connect.html' %}
+{% include 'partials/_owl_carousel_import.html' %}
+{% include 'partials/_footer.html' %}
+{% endblock %}

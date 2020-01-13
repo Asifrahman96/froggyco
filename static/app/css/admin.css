@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+@import url('../svg/all.css');
+
+:root {
+    --primary-color: #4ecca3;
+    --background-color:#232931;
+    --background-color-2:#393e46;
+    --primary-text-color:#eeeeee;
+}
+  
+.primary-color {
+    color: var(--primary-color);
+}
+
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;   
+    line-height: 1.7; 
+    color:var(--background-color);
+}
+
+#header{
+    background: var(--background-color);
+}
+
+#header .brand_img{
+    width: 6rem !important;
+    height: 100%;
+}
+
+#branding h1{
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+#user-tools{
+    color: var(--primary-color);
+}
+
+#content h1{
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+
+}
+
+.module h2, .module caption, .inline-group h2 {
+
+    background: var(--background-color);
+    padding: .5rem !important;
+}
+
+
+.object-tools a:link, .object-tools a:visited {
+    background: var(--background-color);
+    font-size: 1rem;
+    padding:.6rem;
+    border-radius: 0;
+}
+
+/* div.breadcrumbs{
+    background: var(--background-color-2);
+} */
+
+body.dashboard .module table caption a{
+    margin-left:.5rem !important;
+    text-transform: uppercase;
+    font-size:1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+#changelist-search input{
+    height: 40px;
+}
+
+.addlink:before {
+    font-family: FontAwesome;
+    content: "\f067" !important;
+    font-weight: 900;
+}

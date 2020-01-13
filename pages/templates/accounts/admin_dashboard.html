@@ -1,0 +1,213 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+{% include 'partials/_navbar.html' %}
+{% include 'partials/_datatables.html' %}
+{% load mathfilters %}
+<section class="admin_dashboard">
+    <div class="container-fluid">
+    </div>
+        <ul class="nav nav-pills ml-4 mb-3 mt-5 justify-content-start" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-dashboard-tab" data-toggle="pill" href="#pills-dashboard"
+                    role="tab" aria-controls="pills-dashboard" aria-selected="true"><i class="far fa-chart-bar"></i>
+                    Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-orders-tab" data-toggle="pill" href="#pills-orders" role="tab"
+                    aria-controls="pills-orders" aria-selected="false"><i class="fas fa-shopping-cart"></i>
+                    Orders</a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" id="pills-series-tab" data-toggle="pill" href="#pills-series" role="tab"
+                    aria-controls="pills-series" aria-selected="false"><i class="fas fa-file-invoice"></i> Reports</a>
+            </li> -->
+        </ul>
+        <hr class="my-5 bg-dark">
+        <!-------- Dashboard Page -------->
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                aria-labelledby="pills-dashboard-tab">
+                <div class="col-md-12 border border-dark p-5 mt-5">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <h2 class="dashboard_heading_1">Revenue</h2>
+                            <h2 class="primary-color mt-5">{{ revenue.price__sum }} <small>KWD</small></h2>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <h2 class="dashboard_heading_1">Orders Made</h2>
+                            <h2 class="primary-color mt-5">{{ total_orders }}</h2>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <h2 class="dashboard_heading_1">Visitors</h2>
+                            <h2 class="primary-color mt-5">1</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-------- Top Videos Stats -------->
+                <div class="col-md-12 border border-dark p-5 mt-5">
+                    <h2 class="dashboard_heading_1">Top Videos</h2>
+                    <table class="table stats mt-5">
+                        <thead>
+                            <tr class="d-flex">
+                                <th class="col-3">Name</th>
+                                <th class="col-3">Category</th>
+                                <th class="col-9">Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for count in counts %}
+                            <tr class="d-flex">
+                                <td class="col-3">
+                                    {{ count.project_title}}
+                                </td>
+                                <td class="col-3">
+                                    {{ count.project_category }}
+                                </td>
+                                <td class="col-6">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100"
+                                            style="width:{{count.project_id__count|mul:10}}%">
+                                            <span class="progress-caption"> {{ count.project_id__count }} </span>
+                                        </div>
+                                        <span class="progress-revenue mt-1 ml-4">
+                                            <span class="primary-color">
+                                                {{ count.price | mul:count.project_id__count }} KWD
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-------- Top Category Stats -------->
+                <div class="col-md-12 border border-dark p-5 mt-5">
+                    <h2 class="dashboard_heading_1">Top Category</h2>
+                    <table class="table stats mt-5">
+                        <thead>
+                            <tr class="d-flex">
+                                <th class="col-3">Category Name</th>
+                                <th class="col-9">Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="d-flex">
+                                <td class="col-3">
+                                    Theatre
+                                </td>
+                                <td class="col-9">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100"
+                                            style="width:{{ theatre_orders|mul:10 }}%">
+                                            <span class="progress-caption">{{ theatre_orders }}</span>
+                                        </div>
+                                        <span class="progress-revenue mt-1 ml-4">
+                                            <span class="primary-color">
+                                                {{ theatre_revenue.price__sum }} KWD
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-3">
+                                    Movie
+                                </td>
+                                <td class="col-9">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100"
+                                            style="width:{{ movie_orders|mul:10 }}%">
+                                            <span class="progress-caption"> {{ movie_orders }} </span>
+                                        </div>
+                                        <span class="progress-revenue mt-1 ml-4">
+                                            <span class="primary-color">
+                                                {{ movie_revenue.price__sum }} KWD
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <!-------- Daily Revenue Stats -------->
+                <div class="col-md-12 border border-dark p-5 mt-5">
+                    <h2 class="dashboard_heading_1">Daily Revenue</h2>
+                    <table class="table stats mt-5">
+                        <thead>
+                            <tr class="d-flex">
+                                <th class="col-3">Date</th>
+                                <th class="col-9">Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for date in dates %}
+                            <tr class="d-flex">
+                                <td class="col-3">
+                                    {{ date.order_date__date}}
+                                </td>
+                                <td class="col-9">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100"
+                                            style="width:{{ date.sum }}%">
+                                            <span class="progress-caption"> {{ date.project_id__count }} </span>
+                                        </div>
+                                        <span class="progress-revenue mt-1 ml-4">
+                                            <span class="primary-color">
+                                                {{ date.sum }} KWD
+                                            </span>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-------- Orders Page -------->
+            <div class="tab-pane fade show" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+                {% if orders %}
+                <table id="orders" class="table table-dark text-center mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">User name</th>
+                            <th scope="col">Email Id</th>
+                            <th scope="col">Order Item</th>
+                            <th scope="col">Order Category</th>
+                            <th scope="col">Order Date & Time</th>
+                            <th scope="col">Order Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.name }}</td>
+                            <td>{{ order.email }}</td>
+                            <td>{{ order.project_title }}</td>
+                            <td>{{ order.project_category }}</td>
+                            <td>{{ order.order_date | date }}</td>
+                            <td>{{ order.price }} <small>KWD</small></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="container p-5 text-center mt-5" style="border: 1.5px solid #4ecca3;">
+                    <h2 class="heading-secondary primary-color">No Orders made yet.</h2>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'partials/_footer.html' %}
+{% endblock%}
