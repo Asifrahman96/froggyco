@@ -12,7 +12,7 @@ SECRET_KEY = 'cy$5c^nd$xduwo2n2_%56dueg3j7xg0bmtvg#$q(w6-id)9+@)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['46.101.252.150']
 
 # Application definition
 
