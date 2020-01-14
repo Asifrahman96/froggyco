@@ -5,7 +5,7 @@ from projects.models import Project
 class Order(models.Model):
     project_title = models.CharField(max_length=200)
     project_category = models.CharField(max_length=200, blank=True)
-    project_slug = models.TextField(max_length=200)
+    project_slug = models.SlugField(max_length=255)
     project_id = models.IntegerField()
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=100)
