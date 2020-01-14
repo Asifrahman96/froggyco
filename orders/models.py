@@ -10,7 +10,7 @@ class Order(models.Model):
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=100)
     price = models.IntegerField()
-    photo_card = models.ImageField(blank=True)
+    photo_card = models.ImageField(blank=True, max_length=255)
     order_date = models.DateTimeField(default=datetime.now, blank=True)
     user_id  = models.IntegerField(blank=True)
 
