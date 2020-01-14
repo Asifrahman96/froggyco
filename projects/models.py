@@ -6,7 +6,7 @@ project_choices =(('THEATRE','Theatre'),('SERIES','Series'),('MOVIE','Movie'))
 # Create your models here.
 class Project(models.Model):
     title = models.CharField(max_length=200)
-    project_slug = models.SlugField(max_length=255)
+    project_slug = models.SlugField(max_length=255, blank=True)
     category = models.CharField(max_length=100, choices=project_choices)
     project_type = models.CharField(max_length=100)
     description = models.TextField(blank=True) 
