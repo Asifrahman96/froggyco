@@ -26,7 +26,6 @@
         <hr class="my-5 bg-dark">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
-
                 <div class="row mt-5">
                     {% for project in projects %}
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -46,11 +45,9 @@
                     </div>
                     {% endfor %}
                 </div>
-
             </div>
             <div class="tab-pane fade show" id="pills-theatres" role="tabpanel" aria-labelledby="pills-theatres-tab">
                 <div class="row mt-5">
-                    
                     {% for theatre in theatres%}
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <a href="{% url 'projects:project_detail' slug=theatre.slug %}">
@@ -129,6 +126,5 @@
         </div>
     </div>
 </section>
-
 {% include 'partials/_footer.html' %}
 {% endblock %}

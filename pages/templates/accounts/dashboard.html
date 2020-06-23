@@ -89,7 +89,7 @@
                 <a href="{% url 'projects:project_detail' order.project_slug %}">
                     <div class="card">
                         <div class="card-img-top">
-                            <img src="{{ order.photo_card }}" class="img-fluid">
+                            <img src="{{ order.photo_card.url }}" class="img-fluid">
                         </div>
                         <div class="card-body text-center">
                             <h2 class="card-title">{{ order.project_title }}</h2>
