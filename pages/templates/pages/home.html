@@ -73,21 +73,7 @@
                     {% for project in projects_trending %}
                     <div class="item">
                         <a href="{% url 'projects:project_detail' slug=project.slug %}">
-                            <div class="card-box">
-                                <img src="{{ project.photo_card.url }}" class="img-fluid">
-                                <div class="card-box-layer_top">
-                                    <div class="card-box-text">
-                                        <span class="icon">
-                                            <i class="fas fa-play-circle"></i>
-                                        </span>
-                                        <span>
-                                            Watch Now
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+8 
                     {% endfor %}
                 </div>
             </div>
